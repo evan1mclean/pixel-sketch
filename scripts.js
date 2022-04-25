@@ -1,4 +1,4 @@
-let dimension = 100;
+let dimension = 16;
 
 function makeGrid(dimension) {
     let sketchpad = document.querySelector('.sketchpad');
@@ -14,6 +14,9 @@ function makeGrid(dimension) {
 function draw() {
     let grid = document.querySelectorAll('.grid');
     grid.forEach ((pixel) => pixel.addEventListener('mouseover', function(e) {
+        grid.forEach ((pixel) => pixel.addEventListener('click', function() {
+            pixel.style.backgroundColor = "black";
+        }));
         if (e.buttons == 1) {
             pixel.style.backgroundColor = "black";
         }
