@@ -1,0 +1,64 @@
+/* * {
+    border: 1px solid red;
+} */
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(150, 171, 189);
+}
+
+.header p {
+    margin: 0 100px;
+    flex: 1;
+    text-align: center;
+}
+
+.header {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 70px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    width: 20%;
+    margin-left: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    padding: 20px;
+    width: 150px;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    margin-bottom: 50px;
+}
+
+.settings {
+    width: 20%;
+    margin-left: 100px;
+    border: 2px solid black;
+    border-style: inset;
+    border-radius: 4px;
+
+}
+
+.sketchpad {
+    background-color: white;
+    flex: 1;
+    margin: 0 100px;
+    border: 2px solid black;
+    border-style: inset;
+    border-radius: 4px;
+}
