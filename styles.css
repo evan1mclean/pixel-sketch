@@ -69,5 +69,9 @@ body {
 }
 
 .grid {
-    border: 1px rgba(0, 0, 0, 0.041) solid;;
+    border: 1px rgba(0, 0, 0, 0.041) solid;
+}
+
+.grid:hover {
+    background-color: rgb(195, 242, 245);
 }
