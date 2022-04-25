@@ -1,0 +1,10 @@
+make function for creating grid of divs inside sketchpad div
+    let dimension;
+    for i in range (dimension * dimension)
+        grid = create element div
+        append grid
+
+    CSS - grid
+             display: grid
+             grid-template-columns: repeat(dimesnion, 1fr)
+
