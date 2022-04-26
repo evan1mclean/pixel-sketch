@@ -1,6 +1,7 @@
 * {
-    /* border: 1px solid red; */
+   /*  border: 1px solid red; */
     font-family: 'Bebas Neue', cursive;
+    box-sizing: border-box;
 }
 body {
     margin: 0;
@@ -45,7 +46,7 @@ body {
 }
 
 .settings {
-    font-size: 20px;
+    font-size: 18px;
     width: 30%;
     border: 2px solid #353536;
     border-style: inset;
@@ -67,7 +68,7 @@ body {
     width: 60px;
 }
 .settings button {
-    font-size: 20px;
+    font-size: 18px;
     background-color: transparent;
     height: 40px;
     border-radius: 4px;
