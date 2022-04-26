@@ -1,4 +1,4 @@
-let dimension = 20;
+let dimension = document.getElementById('gridSlider').value;
 let color = document.getElementById('penColor').value;
 
 function makeGrid(dimension) {
@@ -27,11 +27,23 @@ function draw(color) {
 function penColor() {
     draw(color);
     document.getElementById('penColor').addEventListener('input', (e) => {
-        draw(e.target.value);
-    })
+    draw(e.target.value);
+});
 }
 
-
+function changeGridSize() {
+    document.getElementById('gridSlider').addEventListener('input', (e) => {
+        let container = document.querySelector('.container');
+        let sketchpad = document.querySelector('.sketchpad');
+        sketchpad.remove();
+        sketchpad = document.createElement('div');
+        sketchpad.classList.add('sketchpad');
+        container.appendChild(sketchpad);
+        makeGrid(e.target.value);
+        draw(color);
+    });
+}
 
 makeGrid(dimension);
+changeGridSize();
 penColor();
