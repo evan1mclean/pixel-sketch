@@ -47,7 +47,7 @@ body {
 .settings {
     font-size: 20px;
     width: 30%;
-    border: 2px solid black;
+    border: 2px solid #353536;
     border-style: inset;
     border-radius: 4px;
     display: flex;
@@ -111,9 +111,10 @@ body {
 
 .sketchpad {
     background-color: white;
+    min-height: 500px;
     height: 100%;
     width: 65vh;
-    border: 2px solid black;
+    border: 2px solid #353536;
     border-style: inset;
     border-radius: 4px;
 }

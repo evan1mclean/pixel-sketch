@@ -1,4 +1,5 @@
 let dimension = 20;
+let color = document.getElementById('penColor').value;
 
 function makeGrid(dimension) {
     let sketchpad = document.querySelector('.sketchpad');
@@ -11,17 +12,26 @@ function makeGrid(dimension) {
     }
 }
 
-function draw() {
+function draw(color) {
     let grid = document.querySelectorAll('.grid');
     grid.forEach ((pixel) => pixel.addEventListener('mouseover', function(e) {
         pixel.addEventListener('mousedown', function() {
-            pixel.style.backgroundColor = "black";
+            pixel.style.backgroundColor = color;
         });
         if (e.buttons == 1) {
-            pixel.style.backgroundColor = "black";
+            pixel.style.backgroundColor = color;
         }
     }));
 }
 
+function penColor() {
+    draw(color);
+    document.getElementById('penColor').addEventListener('input', (e) => {
+        draw(e.target.value);
+    })
+}
+
+
+
 makeGrid(dimension);
-draw();
+penColor();
