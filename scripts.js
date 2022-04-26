@@ -42,6 +42,7 @@ function changeGridSize() {
         sketchpad.classList.add('sketchpad');
         container.appendChild(sketchpad);
         makeGrid(e.target.value);
+        color = document.getElementById('penColor').value;
         draw(color);
     });
 }
