@@ -3,6 +3,8 @@ let color = document.getElementById('penColor').value;
 
 function makeGrid(dimension) {
     let sketchpad = document.querySelector('.sketchpad');
+    let gridSize = document.getElementById('gridSize');
+    gridSize.textContent = `Grid Size: ${dimension} x ${dimension}`;
     sketchpad.style.display = 'grid';
     sketchpad.style.gridTemplateColumns =  `repeat(${dimension}, 1fr)`;
     for (let i =0; i < (dimension * dimension); i++) {
