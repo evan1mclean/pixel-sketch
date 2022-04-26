@@ -75,12 +75,13 @@ body {
     border: 1px solid black;
 }
 
-.settings button:hover {
+.settings > .selected {
     background-color: #1DE1FC;
 }
 
-.settings button:active {
-    background-color: #F919DB;
+.settings button:hover {
+    transform: scale(1.05);
+    transition: all 0.3s;
 }
 
 #gridSlider {

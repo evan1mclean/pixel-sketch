@@ -17,6 +17,27 @@ function makeGrid(dimension, bgColor) {
     }
 }
 
+function removeGrid() {
+    let container = document.querySelector('.container');
+        let sketchpad = document.querySelector('.sketchpad');
+        sketchpad.remove();
+        sketchpad = document.createElement('div');
+        sketchpad.classList.add('sketchpad');
+        container.appendChild(sketchpad);
+}
+
+function clearGrid() {
+    let btn = document.querySelector('.clear');
+    btn.addEventListener('click', function () {
+        removeGrid();
+        color = document.getElementById('penColor').value;
+        bgColor = document.getElementById('bgColor').value;
+        dimension = document.getElementById('gridSlider').value;
+        makeGrid(dimension, bgColor);
+        draw(color);
+    })
+}
+
 function draw(color) {
     let grid = document.querySelectorAll('.grid');
     grid.forEach ((pixel) => pixel.addEventListener('mouseover', function(e) {
@@ -31,7 +52,7 @@ function draw(color) {
     }));
 }
 
-function penColor() {
+function changePenColor() {
     draw(color);
     document.getElementById('penColor').addEventListener('input', (e) => {
     draw(e.target.value);
@@ -40,12 +61,7 @@ function penColor() {
 
 function changeGridSize() {
     document.getElementById('gridSlider').addEventListener('input', (e) => {
-        let container = document.querySelector('.container');
-        let sketchpad = document.querySelector('.sketchpad');
-        sketchpad.remove();
-        sketchpad = document.createElement('div');
-        sketchpad.classList.add('sketchpad');
-        container.appendChild(sketchpad);
+        removeGrid();
         bgColor = document.getElementById('bgColor').value;
         makeGrid(e.target.value, bgColor);
         color = document.getElementById('penColor').value;
@@ -65,4 +81,5 @@ function changeBackgroundColor() {
 makeGrid(dimension);
 changeBackgroundColor();
 changeGridSize();
-penColor();
+changePenColor();
+clearGrid();
