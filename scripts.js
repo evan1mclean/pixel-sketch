@@ -1,4 +1,4 @@
-let dimension = 16;
+let dimension = 20;
 
 function makeGrid(dimension) {
     let sketchpad = document.querySelector('.sketchpad');
