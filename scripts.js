@@ -44,22 +44,11 @@ function clearGrid() {
     })
 }
 
-function isEraserActive() {
-    let eraser = document.querySelector('.eraser');
-    if (eraser.classList.contains('selected')) {
-        console.log(eraser.classList.contains('selected'));
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
 //Function allowing you to draw in the sketchpad by changing the grid div's background
 //colors to the color passed in.
 function draw(color) {
     let grid = document.querySelectorAll('.grid');
-    if (isEraserActive()) {
+    if (isButtonActive("eraser")) {
         bgColor = document.getElementById('bgColor').value;
         color = bgColor;
     }
@@ -76,6 +65,17 @@ function draw(color) {
                 pixel.style.backgroundColor = color;
             }
         }));
+    }
+}
+
+//Function to check if the eraser is currently active
+function isButtonActive(button) {
+    let eraser = document.querySelector(`.${button}`);
+    if (eraser.classList.contains('selected')) {
+        return true;
+    }
+    else {
+        return false;
     }
 }
 
@@ -140,7 +140,9 @@ function gridLines() {
     });
 }
 
+//Function for drawing divs as current background color
 function eraser() {
+    toggleButtonOff();
     let btn = document.querySelector('.eraser');
     btn.addEventListener('click', () => {
         if (btn.classList.contains('selected')) {
@@ -152,15 +154,18 @@ function eraser() {
             let grid = document.querySelectorAll('.grid');
             grid.forEach ((pixel) => pixel.addEventListener('mouseover', function(e) {
                 pixel.addEventListener('mousedown', function() {
+                    //adds background class so change background function works properly
                     pixel.classList.add("background");
                     pixel.style.backgroundColor = bgColor;
                 });
                 if (e.buttons == 1) {
+                    //adds background class so change background function works properly
                     pixel.classList.add("background");
                     pixel.style.backgroundColor = bgColor;
                 }
             }));
         }
+        //reinstantiates the ability to draw
         changePenColor();
     });
 }
