@@ -65,6 +65,7 @@ function changePenColor() {
 function changeGridSize() {
     document.getElementById('gridSlider').addEventListener('input', (e) => {
         removeGrid();
+        toggleButtonOff();
         bgColor = document.getElementById('bgColor').value;
         makeGrid(e.target.value, bgColor);
         color = document.getElementById('penColor').value;
