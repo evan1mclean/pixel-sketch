@@ -33,6 +33,7 @@ function clearGrid() {
         color = document.getElementById('penColor').value;
         bgColor = document.getElementById('bgColor').value;
         dimension = document.getElementById('gridSlider').value;
+        toggleButton('eraser');
         makeGrid(dimension, bgColor);
         draw(color);
     })
@@ -78,8 +79,39 @@ function changeBackgroundColor() {
     });
 }
 
+function toggleButton(button) {
+    let selected = document.querySelector(`.${button}`);
+    if (selected.classList.contains(selected)) {
+        selected.classList.remove('selected');
+    }
+    else {
+        selected.classList.toggle('selected');
+    }
+}
+
+function eraser() {
+    let btn = document.querySelector('.eraser');
+        btn.addEventListener('click', (e) => {
+            toggleButton('eraser');
+            bgColor = document.getElementById('bgColor').value;
+            let grid = document.querySelectorAll('.grid');
+            grid.forEach ((pixel) => pixel.addEventListener('mouseover', function(e) {
+                pixel.addEventListener('mousedown', function() {
+                    pixel.classList.add("background");
+                    pixel.style.backgroundColor = bgColor;
+                });
+                if (e.buttons == 1) {
+                    pixel.classList.add("background");
+                    pixel.style.backgroundColor = bgColor;
+                }
+            }));
+        });
+    changeBackgroundColor();
+}
+
 makeGrid(dimension);
 changeBackgroundColor();
 changeGridSize();
 changePenColor();
 clearGrid();
+eraser();
