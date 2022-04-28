@@ -39,6 +39,22 @@ function clearGrid() {
     })
 }
 
+function gridLines() {
+    let btn = document.querySelector('.gridlines');
+    btn.addEventListener('click', () => {
+        if (btn.classList.contains('selected') == false) {
+            btn.classList.add('selected');
+            let grid = document.querySelectorAll('.grid');
+            grid.forEach((square) => square.style.border = "none");
+        }
+        else {
+            btn.classList.remove('selected');
+            let grid = document.querySelectorAll('.grid');
+            grid.forEach((square) => square.style.border = "1px rgba(0, 0, 0, 0.041) solid");
+        }
+    });
+}
+
 function draw(color) {
     let grid = document.querySelectorAll('.grid');
     grid.forEach ((pixel) => pixel.addEventListener('mouseover', function(e) {
@@ -85,15 +101,17 @@ function changeBackgroundColor() {
 }
 
 function toggleButtonOff() {
-    let selected = document.querySelector('button');
-    if (selected.classList.contains('selected') === true) {
-        selected.classList.remove('selected');
-    }
+    let selected = document.querySelectorAll('button');
+    selected.forEach((button) => {
+        if (button.classList.contains('selected') === true) {
+            button.classList.remove('selected');
+        }
+    })
 }
 
 function eraser() {
     let btn = document.querySelector('.eraser');
-        btn.addEventListener('click', (e) => {
+        btn.addEventListener('click', () => {
             if (btn.classList.contains('selected')) {
                 toggleButtonOff();
             }
@@ -120,3 +138,4 @@ changeGridSize();
 changePenColor();
 clearGrid();
 eraser();
+gridLines();
