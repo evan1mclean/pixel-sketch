@@ -28,27 +28,12 @@ function removeGrid() {
         container.appendChild(sketchpad);
 }
 
-//If clear button is clicked, call the removeGrid function, clear the buttons and
-//redraw the grid
-function clearGrid() {
-    let btn = document.querySelector('.clear');
-    btn.addEventListener('click', function () {
-        removeGrid();
-        color = document.getElementById('penColor').value;
-        bgColor = document.getElementById('bgColor').value;
-        dimension = document.getElementById('gridSlider').value;
-        toggleButtonOff();
-        makeGrid(dimension, bgColor);
-        setGridListeners();
-    })
-}
-
 //Function passed into an event listener allowing you to draw in the sketchpad by changing the grid div's background colors when the mouse is clicked
 function drawWithClick(e) {
     color = document.getElementById('penColor').value;
     bgColor = document.getElementById('bgColor').value;
     //checks if eraser is still toggled
-    if (isButtonActive("eraser")) {
+    if (isModifierActive("eraser")) {
         e.target.classList.add('background');
         e.target.style.backgroundColor = bgColor;
     }
@@ -64,7 +49,7 @@ function drawWithHover(e) {
     color = document.getElementById('penColor').value;
     bgColor = document.getElementById('bgColor').value;
     if (e.buttons == 1) {
-        if (isButtonActive("eraser")) {
+        if (isModifierActive("eraser")) {
             e.target.classList.add('background');
             e.target.style.backgroundColor = bgColor;
         }
@@ -85,8 +70,8 @@ function setGridListeners() {
     });
 }
 
-//Function to check if the eraser is currently active
-function isButtonActive(button) {
+//Function to check if drawing modifier button is currently active
+function isModifierActive(button) {
     let btn = document.querySelector(`.${button}`);
     if (btn.classList.contains('selected')) {
         return true;
@@ -119,11 +104,11 @@ function changeBackgroundColor() {
     });
 }
 
-//toggles all buttons off
+//toggles buttons off except for the grid lines button
 function toggleButtonOff() {
     let selected = document.querySelectorAll('button');
     selected.forEach((button) => {
-        if (button.classList.contains('selected') === true) {
+        if (button.classList.contains('selected')) {
             button.classList.remove('selected');
         }
     })
@@ -135,52 +120,58 @@ function toggleButtonOff() {
 function gridLines() {
     let btn = document.querySelector('.gridlines');
     btn.addEventListener('click', () => {
-        if (btn.classList.contains('selected') == false) {
-            btn.classList.add('selected');
-            let grid = document.querySelectorAll('.grid');
-            grid.forEach((square) => square.style.border = "none");
-        }
-        else {
-            toggleButtonOff();
+        if (btn.classList.contains('gridbutton')) {
+            btn.classList.remove('gridbutton');
             let grid = document.querySelectorAll('.grid');
             grid.forEach((square) => square.style.border = "1px rgba(0, 0, 0, 0.041) solid");
         }
+        else {
+            btn.classList.add('gridbutton');
+            let grid = document.querySelectorAll('.grid');
+            grid.forEach((square) => square.style.border = "none");
+        }
     });
 }
 
-function eraser() {
-    let btn = document.querySelector('.eraser');
+//Function for toggling drawing modifier buttons on or off
+function modifier(button) {
+    let btn = document.querySelector(`.${button}`);
     btn.addEventListener('click', () => {
         if (btn.classList.contains('selected')) {
             toggleButtonOff();
         }
         else {
-            btn.classList.add('selected');
+            toggleButtonOff();
+            btn.classList.toggle('selected');
         }
     });
 }
 
-/* function shader() {
-    let btn = document.querySelector('.shader');
-    btn.addEventListener('click', () => {
-        if (btn.classList.contains('selected')) {
-            toggleButtonOff();
-            isAbleToDraw = true;
-        }
-        else {
-            btn.classList.add('selected');
-            isAbleToDraw = false;
-        }
-        //reinstantiates the ability to draw
-        changePenColor();
-    });
-} */
+//If clear button is clicked, call the removeGrid function, clear the buttons and
+//redraw the grid
+function clearGrid() {
+    let btn = document.querySelector('.clear');
+    let gridbutton = document.querySelector('.gridlines')
+    btn.addEventListener('click', function () {
+        removeGrid();
+        color = document.getElementById('penColor').value;
+        bgColor = document.getElementById('bgColor').value;
+        dimension = document.getElementById('gridSlider').value;
+        toggleButtonOff();
+        gridbutton.classList.remove('gridbutton');
+        makeGrid(dimension, bgColor);
+        setGridListeners();
+    })
+}
 
 makeGrid(dimension);
 setGridListeners();
 changeBackgroundColor();
 changeGridSize();
 clearGrid();
-eraser();
 gridLines();
-/* shader(); */
+//instantiate each of the drawing modifier buttons
+modifier("eraser");
+modifier("shader");
+modifier("lighten");
+modifier("rainbow");

@@ -79,6 +79,10 @@ body {
     background-color: #1DE1FC;
 }
 
+.settings > .gridbutton {
+    background-color: #1DE1FC;
+}
+
 .settings button:hover {
     transform: scale(1.05);
     transition: transform 0.2s;
