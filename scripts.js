@@ -229,14 +229,7 @@ function clearGrid() {
     let btn = document.querySelector('.clear');
     let gridbutton = document.querySelector('.gridlines')
     btn.addEventListener('click', function () {
-        removeGrid();
-        color = document.getElementById('penColor').value;
-        bgColor = document.getElementById('bgColor').value;
-        dimension = document.getElementById('gridSlider').value;
-        toggleButtonOff();
-        gridbutton.classList.remove('gridbutton');
-        makeGrid(dimension, bgColor);
-        setGridListeners();
+        location.reload();
     })
 }
 
