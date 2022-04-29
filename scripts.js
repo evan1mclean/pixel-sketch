@@ -39,53 +39,61 @@ function clearGrid() {
         dimension = document.getElementById('gridSlider').value;
         toggleButtonOff();
         makeGrid(dimension, bgColor);
-        //reinstantiates the draw function
-        draw(color);
+        setGridListeners();
     })
 }
 
-//Function allowing you to draw in the sketchpad by changing the grid div's background
-//colors to the color passed in.
-function draw(color) {
-    let grid = document.querySelectorAll('.grid');
+//Function passed into an event listener allowing you to draw in the sketchpad by changing the grid div's background colors when the mouse is clicked
+function drawWithClick(e) {
+    color = document.getElementById('penColor').value;
+    bgColor = document.getElementById('bgColor').value;
+    //checks if eraser is still toggled
     if (isButtonActive("eraser")) {
-        bgColor = document.getElementById('bgColor').value;
-        color = bgColor;
+        e.target.classList.add('background');
+        e.target.style.backgroundColor = bgColor;
     }
     else {
-        grid.forEach ((pixel) => pixel.addEventListener('mouseover', function(e) {
-            pixel.addEventListener('mousedown', function() {
-                //removes background class from grid div so changing background color doesn't override what you've drawn
-                pixel.classList.remove('background');
-                pixel.style.backgroundColor = color;
-            });
-            if (e.buttons == 1) {
-                //removes background class from grid div so changing background color doesn't override what you've drawn
-                pixel.classList.remove('background');
-                pixel.style.backgroundColor = color;
-            }
-        }));
+        //removes background class from grid div so changing background color doesn't override what you've drawn
+        e.target.classList.remove('background');
+        e.target.style.backgroundColor = color;
     }
+}
+
+//Function passed into an event listener allowing you to draw in the sketchpad by changing the grid div's background colors when the mouse is passed over a div with the mouse down
+function drawWithHover(e) {
+    color = document.getElementById('penColor').value;
+    bgColor = document.getElementById('bgColor').value;
+    if (e.buttons == 1) {
+        if (isButtonActive("eraser")) {
+            e.target.classList.add('background');
+            e.target.style.backgroundColor = bgColor;
+        }
+        else {
+            //removes background class from grid div so changing background color doesn't override what you've drawn
+            e.target.classList.remove('background');
+            e.target.style.backgroundColor = color;
+        }
+    }
+}
+
+//Function to set the listeners on all of the items in the sketchpad
+function setGridListeners() {
+    let grid = document.querySelectorAll('.grid');
+    grid.forEach((pixel) => {
+        pixel.addEventListener('mousedown', drawWithClick);
+        pixel.addEventListener('mouseenter', drawWithHover);
+    });
 }
 
 //Function to check if the eraser is currently active
 function isButtonActive(button) {
-    let eraser = document.querySelector(`.${button}`);
-    if (eraser.classList.contains('selected')) {
+    let btn = document.querySelector(`.${button}`);
+    if (btn.classList.contains('selected')) {
         return true;
     }
     else {
         return false;
     }
-}
-
-//Recieves input from the pen color picker to pass that value into the draw function
-function changePenColor() {
-    color = document.getElementById('penColor').value;
-    draw(color);
-    document.getElementById('penColor').addEventListener('input', (e) => {
-        draw(e.target.value);
-    });
 }
 
 //Takes input from grid slider to get a new dimension. Destroys the grid and rebuilds
@@ -96,7 +104,7 @@ function changeGridSize() {
         bgColor = document.getElementById('bgColor').value;
         makeGrid(e.target.value, bgColor);
         color = document.getElementById('penColor').value;
-        draw(color);
+        setGridListeners();
     });
 }
 
@@ -107,7 +115,7 @@ function changeBackgroundColor() {
         grid.forEach((cell) => {
             cell.style.backgroundColor = `${e.target.value}`;
         })
-        changePenColor();
+        setGridListeners();
     });
 }
 
@@ -140,9 +148,7 @@ function gridLines() {
     });
 }
 
-//Function for drawing divs as current background color
 function eraser() {
-    toggleButtonOff();
     let btn = document.querySelector('.eraser');
     btn.addEventListener('click', () => {
         if (btn.classList.contains('selected')) {
@@ -150,30 +156,31 @@ function eraser() {
         }
         else {
             btn.classList.add('selected');
-            bgColor = document.getElementById('bgColor').value;
-            let grid = document.querySelectorAll('.grid');
-            grid.forEach ((pixel) => pixel.addEventListener('mouseover', function(e) {
-                pixel.addEventListener('mousedown', function() {
-                    //adds background class so change background function works properly
-                    pixel.classList.add("background");
-                    pixel.style.backgroundColor = bgColor;
-                });
-                if (e.buttons == 1) {
-                    //adds background class so change background function works properly
-                    pixel.classList.add("background");
-                    pixel.style.backgroundColor = bgColor;
-                }
-            }));
+        }
+    });
+}
+
+/* function shader() {
+    let btn = document.querySelector('.shader');
+    btn.addEventListener('click', () => {
+        if (btn.classList.contains('selected')) {
+            toggleButtonOff();
+            isAbleToDraw = true;
+        }
+        else {
+            btn.classList.add('selected');
+            isAbleToDraw = false;
         }
         //reinstantiates the ability to draw
         changePenColor();
     });
-}
+} */
 
 makeGrid(dimension);
+setGridListeners();
 changeBackgroundColor();
 changeGridSize();
-changePenColor();
 clearGrid();
 eraser();
 gridLines();
+/* shader(); */
