@@ -134,5 +134,5 @@ body {
 }
 
 .grid:hover {
-    background-color: rgb(195, 242, 245);
+    background-color: rgb(195, 242, 245) !important;
 }

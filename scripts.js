@@ -32,10 +32,24 @@ function removeGrid() {
 function drawWithClick(e) {
     color = document.getElementById('penColor').value;
     bgColor = document.getElementById('bgColor').value;
-    //checks if eraser is still toggled
+    //checks for the different drawing modifiers and draws different colors depending on what's selected
     if (isModifierActive("eraser")) {
         e.target.classList.add('background');
         e.target.style.backgroundColor = bgColor;
+    }
+    else if (isModifierActive("shader")) {
+        e.target.classList.remove('background');
+        color = e.target.style.backgroundColor;
+        let hex = RGBToHex(color);
+        let newColor = adjust(hex, -10);
+        e.target.style.backgroundColor = newColor;
+    }
+    else if (isModifierActive("lighten")) {
+        e.target.classList.remove('background');
+        color = e.target.style.backgroundColor;
+        let hex = RGBToHex(color);
+        let newColor = adjust(hex, 10);
+        e.target.style.backgroundColor = newColor;
     }
     else {
         //removes background class from grid div so changing background color doesn't override what you've drawn
@@ -49,9 +63,24 @@ function drawWithHover(e) {
     color = document.getElementById('penColor').value;
     bgColor = document.getElementById('bgColor').value;
     if (e.buttons == 1) {
+        //checks for the different drawing modifiers and draws different colors depending on what's selected
         if (isModifierActive("eraser")) {
             e.target.classList.add('background');
             e.target.style.backgroundColor = bgColor;
+        }
+        else if (isModifierActive("shader")) {
+            e.target.classList.remove('background');
+            color = e.target.style.backgroundColor;
+            let hex = RGBToHex(color);
+            let newColor = adjust(hex, -10);
+            e.target.style.backgroundColor = newColor;
+        }
+        else if (isModifierActive("lighten")) {
+            e.target.classList.remove('background');
+            color = e.target.style.backgroundColor;
+            let hex = RGBToHex(color);
+            let newColor = adjust(hex, 10);
+            e.target.style.backgroundColor = newColor;
         }
         else {
             //removes background class from grid div so changing background color doesn't override what you've drawn
@@ -114,6 +143,35 @@ function toggleButtonOff() {
     })
 }
 
+/* These two functions are stolen completely from online. Had no idea how to parse
+rgb colors and shift them so I figured, why reinvent the wheel? */
+
+//Taken from: https://css-tricks.com/converting-color-spaces-in-javascript/
+function RGBToHex(rgb) {
+    // Choose correct separator
+    let sep = rgb.indexOf(",") > -1 ? "," : " ";
+    // Turn "rgb(r,g,b)" into [r,g,b]
+    rgb = rgb.substr(4).split(")")[0].split(sep);
+  
+    let r = (+rgb[0]).toString(16),
+        g = (+rgb[1]).toString(16),
+        b = (+rgb[2]).toString(16);
+  
+    if (r.length == 1)
+      r = "0" + r;
+    if (g.length == 1)
+      g = "0" + g;
+    if (b.length == 1)
+      b = "0" + b;
+  
+    return "#" + r + g + b;
+}
+
+//Taken from user supersan: https://stackoverflow.com/questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors
+function adjust(color, amount) {
+    return '#' + color.replace(/^#/, '').replace(/../g, color => ('0'+Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).substr(-2));
+}
+
 /* -------------- Button Functions are below this line  ---------------------- */
 
 //When grid line button is clicked, button is toggled and grid borders are removed or added
@@ -164,7 +222,7 @@ function clearGrid() {
     })
 }
 
-makeGrid(dimension);
+makeGrid(dimension, "rgb(255,255,255)");
 setGridListeners();
 changeBackgroundColor();
 changeGridSize();
