@@ -227,7 +227,6 @@ function modifier(button) {
 //redraw the grid
 function clearGrid() {
     let btn = document.querySelector('.clear');
-    let gridbutton = document.querySelector('.gridlines')
     btn.addEventListener('click', function () {
         location.reload();
     })
