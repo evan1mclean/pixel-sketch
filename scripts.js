@@ -51,6 +51,11 @@ function drawWithClick(e) {
         let newColor = adjust(hex, 10);
         e.target.style.backgroundColor = newColor;
     }
+    else if (isModifierActive("rainbow")) {
+        e.target.classList.remove('background');
+        color = randomRGB();
+        e.target.style.backgroundColor = color;
+    }
     else {
         //removes background class from grid div so changing background color doesn't override what you've drawn
         e.target.classList.remove('background');
@@ -81,6 +86,11 @@ function drawWithHover(e) {
             let hex = RGBToHex(color);
             let newColor = adjust(hex, 10);
             e.target.style.backgroundColor = newColor;
+        }
+        else if (isModifierActive("rainbow")) {
+            e.target.classList.remove('background');
+            color = randomRGB();
+            e.target.style.backgroundColor = color;
         }
         else {
             //removes background class from grid div so changing background color doesn't override what you've drawn
@@ -141,6 +151,14 @@ function toggleButtonOff() {
             button.classList.remove('selected');
         }
     })
+}
+
+//Function to spit out a random rgb value
+function randomRGB() {
+    let r = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
+    return `rgb(${r}, ${g}, ${b})`;
 }
 
 /* These two functions are stolen completely from online. Had no idea how to parse
