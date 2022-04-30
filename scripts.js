@@ -2,6 +2,16 @@
 let dimension = document.getElementById('gridSlider').value;
 let color = document.getElementById('penColor').value;
 
+//Function I found online to prevent a dragging issue that was popping up on windows
+$(document.body).bind('dragover', function(e) {
+    e.preventDefault();
+});
+
+////Function I found online to prevent a dragging issue that was popping up on windows
+$(document.body).bind('dragenter', function(e) {
+    e.preventDefault();
+});
+
 //Draws a grid of divs in the sketchpad container div.
 function makeGrid(dimension, bgColor) {
     let sketchpad = document.querySelector('.sketchpad');
