@@ -146,4 +146,5 @@ input[type=range] {
 
 .grid:hover {
     background-color: rgb(195, 242, 245) !important;
+    cursor: cell;
 }

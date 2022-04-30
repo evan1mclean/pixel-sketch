@@ -13,7 +13,6 @@ function makeGrid(dimension, bgColor) {
         const grid = document.createElement('div');
         grid.classList.add('grid');
         grid.classList.add('background');
-        grid.setAttribute('draggable','false');
         grid.style.backgroundColor = bgColor;
         sketchpad.appendChild(grid);
     }
