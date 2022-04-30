@@ -32,7 +32,7 @@ function removeGrid() {
 //Function passed into an event listener allowing you to draw in the sketchpad by changing the grid div's background colors when the mouse is clicked
 function drawWithClick(e) {
     color = document.getElementById('penColor').value;
-    bgColor = document.getElementById('bgColor').value;
+    let bgColor = document.getElementById('bgColor').value;
     //checks for the different drawing modifiers and draws different colors depending on what's selected
     if (isModifierActive("eraser")) {
         e.target.classList.add('background');
@@ -66,9 +66,9 @@ function drawWithClick(e) {
 
 //Function passed into an event listener allowing you to draw in the sketchpad by changing the grid div's background colors when the mouse is passed over a div with the mouse down
 function drawWithHover(e) {
-    color = document.getElementById('penColor').value;
-    bgColor = document.getElementById('bgColor').value;
-    if (e.buttons == 1) {
+    if (e.buttons > 0) {
+        color = document.getElementById('penColor').value;
+        let bgColor = document.getElementById('bgColor').value;
         //checks for the different drawing modifiers and draws different colors depending on what's selected
         if (isModifierActive("eraser")) {
             e.target.classList.add('background');
