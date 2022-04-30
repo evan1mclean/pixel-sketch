@@ -1,5 +1,5 @@
 * {
-   /*  border: 1px solid red; */
+    /* border: 1px solid red; */
     font-family: 'Bebas Neue', cursive;
     box-sizing: border-box;
     margin: 0;
@@ -11,7 +11,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(150, 171, 189);
+    background-color: #c5d4cb;
 }
 
 .header p {
@@ -20,7 +20,7 @@ body {
 }
 
 .header {
-    font-size: 70px;
+    font-size: 80px;
     text-align: center;
     display: flex;
     flex-wrap: wrap;
@@ -50,14 +50,14 @@ body {
 .settings {
     font-size: 18px;
     width: 30%;
-    border: 2px solid #353536;
-    border-style: inset;
+    border: 5px groove;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
     padding: 20px 40px;
+    background-color: rgb(255, 255, 255);
 }
 
 #penColor,
@@ -69,12 +69,15 @@ body {
     height: 40px;
     width: 60px;
 }
+
 .settings button {
     font-size: 18px;
     background-color: transparent;
     height: 40px;
     border-radius: 4px;
     border: 1px solid black;
+    box-shadow: 1px 1px 3px;
+    background-color: #c5d4cb;
 }
 
 .settings > .selected {
@@ -88,10 +91,16 @@ body {
 .settings button:hover {
     transform: scale(1.05);
     transition: transform 0.2s;
+    cursor: pointer;
 }
 
 .settings button:active {
     background-color: #1DE1FC;
+}
+
+input[type=range] {
+    accent-color: #F919DD;
+    cursor: pointer;
 }
 
 #gridSlider {
@@ -126,7 +135,7 @@ body {
     min-height: 500px;
     height: 100%;
     width: 65vh;
-    border: 2px solid #353536;
+    border: 5px groove;
     border-style: inset;
     border-radius: 4px;
 }

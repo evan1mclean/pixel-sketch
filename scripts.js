@@ -234,7 +234,7 @@ function clearGrid() {
     })
 }
 
-makeGrid(dimension, "rgb(255,255,255)");
+makeGrid(dimension, "rgb(255, 255, 255)");
 setGridListeners();
 changeBackgroundColor();
 changeGridSize();
