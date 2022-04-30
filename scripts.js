@@ -31,6 +31,7 @@ function removeGrid() {
 
 //Function passed into an event listener allowing you to draw in the sketchpad by changing the grid div's background colors when the mouse is clicked
 function drawWithClick(e) {
+    e.preventDefault();
     color = document.getElementById('penColor').value;
     let bgColor = document.getElementById('bgColor').value;
     //checks for the different drawing modifiers and draws different colors depending on what's selected
