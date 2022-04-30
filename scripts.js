@@ -13,6 +13,7 @@ function makeGrid(dimension, bgColor) {
         const grid = document.createElement('div');
         grid.classList.add('grid');
         grid.classList.add('background');
+        grid.setAttribute('draggable','false');
         grid.style.backgroundColor = bgColor;
         sketchpad.appendChild(grid);
     }
@@ -32,7 +33,6 @@ function removeGrid() {
 function drawWithClick(e) {
     color = document.getElementById('penColor').value;
     bgColor = document.getElementById('bgColor').value;
-    e.stopPropagation();
     //checks for the different drawing modifiers and draws different colors depending on what's selected
     if (isModifierActive("eraser")) {
         e.target.classList.add('background');
@@ -68,7 +68,6 @@ function drawWithClick(e) {
 function drawWithHover(e) {
     color = document.getElementById('penColor').value;
     bgColor = document.getElementById('bgColor').value;
-    e.stopPropagation();
     if (e.buttons == 1) {
         //checks for the different drawing modifiers and draws different colors depending on what's selected
         if (isModifierActive("eraser")) {
