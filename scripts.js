@@ -32,6 +32,7 @@ function removeGrid() {
 function drawWithClick(e) {
     color = document.getElementById('penColor').value;
     bgColor = document.getElementById('bgColor').value;
+    e.stopPropagation();
     //checks for the different drawing modifiers and draws different colors depending on what's selected
     if (isModifierActive("eraser")) {
         e.target.classList.add('background');
@@ -67,6 +68,7 @@ function drawWithClick(e) {
 function drawWithHover(e) {
     color = document.getElementById('penColor').value;
     bgColor = document.getElementById('bgColor').value;
+    e.stopPropagation();
     if (e.buttons == 1) {
         //checks for the different drawing modifiers and draws different colors depending on what's selected
         if (isModifierActive("eraser")) {
